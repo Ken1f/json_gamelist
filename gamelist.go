@@ -4,8 +4,6 @@ import (
     "fmt"
     "log"
     "os"
-    "bufio"
-    "strings"
 )
 
 func main() {
@@ -13,20 +11,15 @@ func main() {
     playlist := ""
     path := ""
 
-    fmt.Printf("neoKEN's JSON Gamelist Creator\nVersion 1.0\n")
+    fmt.Printf("neoKEN's JSON Gamelist Creator\nVersion 1.1\n")
 
     confirm := "n"
-    for confirm != "y" {
-      reader := bufio.NewReader(os.Stdin)
-      fmt.Print("Enter ROM folder :")
-      path, _ = reader.ReadString('\n')
-      path = strings.Replace(path, "\n", "", -1)
-
-      reader = bufio.NewReader(os.Stdin)
-      fmt.Print("Enter PLAYLIST name :")
-      playlist, _ = reader.ReadString('\n')
-      playlist = strings.Replace(playlist, "\n", "", -1)
-
+  for confirm != "y" {
+    fmt.Print("Enter ROM folder :")
+    fmt.Scanln(&path)
+    fmt.Print("Enter PLAYLIST name :")
+	playlist = "SNES"
+	fmt.Scanln(&playlist)
     fmt.Printf(`
         {
           "path": "/mnt/sdcard/%s/Cyber Troopers Virtual-On Oratorio Tangram.chd",
@@ -37,16 +30,11 @@ func main() {
           "db_name": "%s.lpl"
         }
     Is this correct? y/n `, path, playlist)
-
-      reader = bufio.NewReader(os.Stdin)
-      confirm, _ = reader.ReadString('\n')
-      confirm = strings.Replace(confirm, "\n", "", -1)
+	fmt.Scanln(&confirm)
    }
 
-    reader := bufio.NewReader(os.Stdin)
     fmt.Print("Enter path to scan (or enter '.' for currect path):")
-    dirname, _ = reader.ReadString('\n')
-    dirname = strings.Replace(dirname, "\n", "", -1)
+	fmt.Scanln(&dirname)
 
     if dirname == "" {
         dirname = "."
@@ -78,6 +66,7 @@ func main() {
     "left_thumbnail_mode": 0,
     "sort_mode": 0,
     "items": [`
+
     footer :=`
     ]
 }`
